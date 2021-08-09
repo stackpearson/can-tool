@@ -40,3 +40,7 @@ const TileContainer = (props) => {
 }
 
 export default TileContainer;
+
+// Add CRUD functionalty for tiles
+// Add themes
+// Add a titles region so you can organize cans into categories

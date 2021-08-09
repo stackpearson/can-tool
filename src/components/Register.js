@@ -2,7 +2,7 @@ import {useState} from 'react';
 import axios from 'axios';
 import { Form, FormGroup, Button, Label, Input, FormText } from 'reactstrap';
 
-const Login = () => {
+const Register = () => {
 
     const [loginCreds, setLoginCreds] = useState({
         username: '',
@@ -18,12 +18,12 @@ const Login = () => {
         setLoginCreds(currentCreds)
     }
 
-    const signIn = (e) => {
+    const registerUser = (e) => {
         e.preventDefault();
         e.persist();
 
         axios
-        .post('https://cans-be.herokuapp.com/api/auth/login', loginCreds)
+        .post('https://cans-be.herokuapp.com/api/auth/register', loginCreds)
         .then((res) => {
             console.log(res)
             localStorage.setItem('bearer-token', res.data.token)
@@ -32,9 +32,8 @@ const Login = () => {
 
     return (<> 
         <div className='landing'>
-            <h1>Welcome To Express Cans!</h1>
             <div>
-                <Form onSubmit={signIn}>
+                <Form onSubmit={registerUser}>
                 <FormGroup>
                     <Label for="username"></Label>
                     <Input type="username" name="username" placeholder="Username" onChange={handleChanges} value={loginCreds.username} />
@@ -45,11 +44,11 @@ const Login = () => {
                 </FormGroup>
 
             
-                <Button type="submit">Login</Button>
+                <Button type="submit">Register</Button>
                 </Form>
             </div>
         </div>
     </>)
 }
 
-export default Login;
+export default Register;

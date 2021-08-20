@@ -20,13 +20,12 @@ const TileContainer = (props) => {
     }
 
 
-    const [tileInfo, setTileInfo] = useState()
+    const [tileInfo, setTileInfo] = useState([])
     return(<>
         <div className='tile-container'>
         {tileInfo.map((tile) => (
             <Tile key={tile.id} tileData={tile} />
         ))}
-        <p>here's your</p>
         </div>
     </>)
 }

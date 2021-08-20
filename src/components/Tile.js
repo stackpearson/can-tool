@@ -17,8 +17,6 @@ const Tile = (props) => {
             </div>
             {props.tileData.can_name}
             <div className='tile-text'>{props.tileData.can_text}</div>
-
-            <p>We'll have some tiles here</p>
         </div>
     </>)
 }

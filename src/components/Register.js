@@ -1,8 +1,11 @@
 import {useState} from 'react';
 import axios from 'axios';
 import { Form, FormGroup, Button, Label, Input, FormText } from 'reactstrap';
+import {Link, useHistory} from 'react-router-dom';
 
-const Register = () => {
+const Register = (props) => {
+
+    let history = useHistory();
 
     const [loginCreds, setLoginCreds] = useState({
         username: '',
@@ -27,11 +30,13 @@ const Register = () => {
         .then((res) => {
             console.log(res)
             localStorage.setItem('bearer-token', res.data.token)
+            history.push('/dashboard')
         })
     }
 
     return (<> 
         <div className='landing'>
+        <h1>Let's create your account!</h1>
             <div>
                 <Form onSubmit={registerUser}>
                 <FormGroup>
@@ -45,6 +50,7 @@ const Register = () => {
 
             
                 <Button type="submit">Register</Button>
+                <p>Already a member <Link to='/'>Sign in</Link></p>
                 </Form>
             </div>
         </div>

@@ -1,8 +1,11 @@
 import {useState} from 'react';
 import axios from 'axios';
 import { Form, FormGroup, Button, Label, Input, FormText } from 'reactstrap';
+import {Link, useHistory} from 'react-router-dom';
 
 const Login = () => {
+
+    let history = useHistory();
 
     const [loginCreds, setLoginCreds] = useState({
         username: '',
@@ -27,6 +30,7 @@ const Login = () => {
         .then((res) => {
             console.log(res)
             localStorage.setItem('bearer-token', res.data.token)
+            history.push('/dashboard')
         })
     }
 
@@ -46,6 +50,7 @@ const Login = () => {
 
             
                 <Button type="submit">Login</Button>
+                <p>New? <Link to='/register'>Register</Link></p>
                 </Form>
             </div>
         </div>

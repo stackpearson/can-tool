@@ -1,40 +1,32 @@
 import Tile from './Tile';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 const TileContainer = (props) => {
 
-    const [tileInfo, setTileInfo] = useState([
-        {
-            id: 1,
-            title: 'sample title 1',
-            text: 'this is some sample text'
-        },
-        {
-            id: 2,
-            title: 'sample title 2',
-            text: 'this is some sample text'
-        },
-        {
-            id: 3,
-            title: 'sample title 2',
-            text: 'this is some sample text'
-        },
-        {
-            id: 4,
-            title: 'sample title 2',
-            text: 'this is some sample text'
-        },
-        {
-            id: 5,
-            title: 'sample title 2',
-            text: 'this is some sample text'
-        }
-    ])
+    // let user_id = localStorage.getItem('user-id');
+
+    useEffect(() => {
+        getCans();
+    }, [])
+
+    const getCans = () => {
+        axiosWithAuth()
+        .get(`https://cans-be.herokuapp.com/api/cans/user-cans/${localStorage.getItem('user-id')}`)
+        .then(res => {
+            console.log(res)
+            setTileInfo(res.data)
+        })
+    }
+
+
+    const [tileInfo, setTileInfo] = useState()
     return(<>
         <div className='tile-container'>
         {tileInfo.map((tile) => (
             <Tile key={tile.id} tileData={tile} />
-        ))}  
+        ))}
+        <p>here's your</p>
         </div>
     </>)
 }

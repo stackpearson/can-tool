@@ -30,6 +30,8 @@ const Register = (props) => {
         .then((res) => {
             console.log(res)
             localStorage.setItem('bearer-token', res.data.token)
+            localStorage.setItem('username', res.data.username)
+            localStorage.setItem('user-id', res.data.id)
             history.push('/dashboard')
         })
     }

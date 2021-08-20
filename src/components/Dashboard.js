@@ -1,9 +1,11 @@
+import TileContainer from "./TileContainer";
+
 const Dashboard = () => {
 
 
     return (<> 
         <div className='dashboard'>
-            <p>this will be the dashbaord</p>
+            <TileContainer />
         </div>
         
     </>)

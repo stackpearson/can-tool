@@ -5,7 +5,7 @@ const Tile = (props) => {
 
     const handleCopy = () => {
         // setTileInfo(null)
-        navigator.clipboard.writeText(props.tileData.text)
+        navigator.clipboard.writeText(props.tileData.can_text)
     }
 
     return (<> 
@@ -15,8 +15,10 @@ const Tile = (props) => {
                 <span> |*| </span>
                 <span>|X|</span>
             </div>
-            {props.tileData.title}
-            <div className='tile-text'>{props.tileData.text}</div>
+            {props.tileData.can_name}
+            <div className='tile-text'>{props.tileData.can_text}</div>
+
+            <p>We'll have some tiles here</p>
         </div>
     </>)
 }

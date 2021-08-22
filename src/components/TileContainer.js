@@ -1,7 +1,6 @@
 import Tile from './Tile';
 import {useEffect, useState} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
-import axios from 'axios';
 import {Form, FormGroup, Button, Label, Input} from 'reactstrap';
 
 const TileContainer = (props) => {
@@ -19,24 +18,8 @@ const TileContainer = (props) => {
         })
     }
 
-    // const addCan = (e) => {
-    //     e.preventDefault();
-    //     e.persist();
-
-    //     axios
-    //     console.log('addCan fired')
-    //     console.log('newTile', newTile)
-    //     // console.log('newTile:', newTile)
-    //     .post(`https://cans-be.herokuapp.com/api/cans/new-can/${localStorage.getItem('user-id')}`, newTile)
-    //     .then((res) => {
-    //         console.log("this is from the addCan post", res.data)
-    //         tileInfo.push(res.data)
-    //     })
-    // }
-
     const addCan = (e) => {
         e.preventDefault();
-        e.persist();
 
         axiosWithAuth()
         .post(`https://cans-be.herokuapp.com/api/cans/new-can/${localStorage.getItem('user-id')}`, newTile)

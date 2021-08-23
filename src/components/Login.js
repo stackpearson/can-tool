@@ -2,8 +2,10 @@ import {useState} from 'react';
 import axios from 'axios';
 import { Form, FormGroup, Button, Label, Input } from 'reactstrap';
 import {Link, useHistory} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {setUser} from '../actions/userActions';
 
-const Login = () => {
+const Login = (props) => {
 
     let history = useHistory();
 
@@ -32,6 +34,7 @@ const Login = () => {
             localStorage.setItem('bearer-token', res.data.token)
             localStorage.setItem('username', res.data.username)
             localStorage.setItem('user-id', res.data.id)
+            props.setUser(res.data)
             history.push('/dashboard')
         })
     }
@@ -59,4 +62,13 @@ const Login = () => {
     </>)
 }
 
-export default Login;
+const mapStateToProps = state => {
+    return {
+        userOnProps: state.userReducer
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    {setUser}
+  )(Login)

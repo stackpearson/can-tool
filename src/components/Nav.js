@@ -1,7 +1,9 @@
-import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {logOut, setUser} from '../actions/userActions';
 
 
-function Nav() {
+function Nav(props) {
     let history = useHistory();
 
     const signOut = () => {
@@ -19,4 +21,13 @@ function Nav() {
   );
 }
 
-export default Nav;
+const mapStateToProps = state => {
+  return {
+      userOnProps: state.userReducer
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {logOut, setUser}
+)(Nav)

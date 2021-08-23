@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import axios from 'axios';
-import { Form, FormGroup, Button, Label, Input, FormText } from 'reactstrap';
+import { Form, FormGroup, Button, Label, Input } from 'reactstrap';
 import {Link, useHistory} from 'react-router-dom';
 
 const Login = () => {

@@ -1,10 +1,9 @@
-import TileContainer from './components/TileContainer';
 import Login from './components/Login';
 import './App.css';
 import Nav from './components/Nav';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
-import {Route, Switch, useHistory} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import PrivateRoute from './utils/PrivateRoute';
 
 function App() {

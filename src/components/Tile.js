@@ -3,7 +3,6 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 import {Form, FormGroup, Button, Label, Input} from 'reactstrap';
 
 const Tile = (props) => {
-    const [tileInfo, setTileInfo] = useState(props)
     const [updatedTile, setUpdatedTile] = useState({
         can_name: '',
         can_text: ''

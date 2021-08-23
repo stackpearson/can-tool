@@ -17,7 +17,7 @@ function App() {
     <Nav/>
     <Switch>
       <Route exact path='/' component={Login} />
-      <PrivateRoute path='/register' component={Register} />
+      <Route path='/register' component={Register} />
       <PrivateRoute path='/dashboard' component={Dashboard} />
     </Switch>
   </>);

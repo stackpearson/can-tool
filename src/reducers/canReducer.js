@@ -9,6 +9,12 @@ export const canReducer = (state = initialOptions, action) => {
                 ...state,
                 cans: action.payload
             };
+        
+        case 'ADD_CAN':
+            return {
+                ...state,
+                cans: state.cans.concat(action.payload)
+            };
 
             default:
                 return state;

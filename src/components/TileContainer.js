@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {Form, FormGroup, Button, Label, Input} from 'reactstrap';
 import {connect} from 'react-redux';
-import {setCans} from '../actions/canActions';
+import {setCans, addCan} from '../actions/canActions';
 
 const TileContainer = (props) => {
 
@@ -23,11 +23,12 @@ const TileContainer = (props) => {
 
     const addCan = (e) => {
         e.preventDefault();
-
+        e.persist();
         axiosWithAuth()
         .post(`https://cans-be.herokuapp.com/api/cans/new-can/${localStorage.getItem('user-id')}`, newTile)
         .then((res) => {
             console.log('res from addCan post', res.data)
+            props.addCan(res.data)
             
         })
     }
@@ -83,7 +84,7 @@ const mapStateToProps = state => {
   
   export default connect(
     mapStateToProps,
-    {setCans}
+    {setCans, addCan}
   )(TileContainer)
 
 // Add CRUD functionalty for tiles

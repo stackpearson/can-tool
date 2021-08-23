@@ -34,6 +34,7 @@ const Login = (props) => {
             localStorage.setItem('bearer-token', res.data.token)
             localStorage.setItem('username', res.data.username)
             localStorage.setItem('user-id', res.data.id)
+            localStorage.setItem('isLoggedIn', true)
             props.setUser(res.data)
             history.push('/dashboard')
         })

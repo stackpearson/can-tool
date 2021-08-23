@@ -1,4 +1,5 @@
 export const initialState = {
+    isLoggedIn: localStorage.getItem('isLoggedIn'),
     user: {
         'bearer-token': localStorage.getItem('bearer-token'),
         'username': localStorage.getItem('username'),
@@ -11,12 +12,14 @@ export const userReducer = (state = initialState, action) => {
         case 'SET_USER':
             return {
                 ...state,
+                isLoggedIn: true,
                 user: action.payload
             };
 
         case 'LOG_OUT':
             return {
                 ...state,
+                isLoggedIn: false,
                 user: {}
             }
 

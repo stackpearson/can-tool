@@ -5,3 +5,4 @@ export const setUser = activeUser => {
 export const logOut = toggle => {
     return {type: 'LOG_OUT', payload: toggle}
 }
+

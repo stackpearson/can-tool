@@ -2,6 +2,8 @@ import {useState} from 'react';
 import axios from 'axios';
 import { Form, FormGroup, Button, Label, Input } from 'reactstrap';
 import {Link, useHistory} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {setUser} from '../actions/userActions';
 
 const Register = (props) => {
 
@@ -33,6 +35,7 @@ const Register = (props) => {
             localStorage.setItem('username', res.data.username)
             localStorage.setItem('user-id', res.data.id)
             localStorage.setItem('isLoggedIn', true)
+            props.setUser(res.data)
             history.push('/dashboard')
         })
     }
@@ -60,4 +63,13 @@ const Register = (props) => {
     </>)
 }
 
-export default Register;
+const mapStateToProps = state => {
+    return {
+        userOnProps: state.userReducer
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    {setUser}
+  )(Register)

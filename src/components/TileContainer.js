@@ -26,7 +26,6 @@ const TileContainer = (props) => {
         .then((res) => {
             console.log('res from addCan post', res.data)
             tileInfo.push(res.data)
-
         })
     }
 

@@ -9,6 +9,7 @@ function Nav(props) {
     const signOut = () => {
         localStorage.removeItem('bearer-token')
         localStorage.removeItem('username')
+        props.logOut()
         history.push('/')
         console.log('checking local storage for token', localStorage.getItem('bearer-token'))
     }

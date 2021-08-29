@@ -24,17 +24,28 @@ export const canReducer = (state = initialOptions, action) => {
                 })
             }
 
-        // case 'UPDATE_CAN':
-        //     return state.cans.map((item) => {
-        //         if (item.id !== action.payload.id){
-        //             return item
-        //         }
+        // case 'UPDATE_CAN': {
+        //     const index = state.cans.findIndex(can => can.id === action.payload.id);
+        //     const newArr = [...state.cans]
+        //     newArr[index] = action.payload
 
-        //         return {
-        //             ...item,
-        //             ...action.payload
-        //         }
-        //     })
+        //     return {
+        //         ...state,
+        //         cans: newArr,
+        //     }
+        // }
+
+        case 'UPDATE_CAN': {
+            const index = state.cans.findIndex(can => can.id === action.payload.id);
+            const newArr = [...state.cans]
+
+            newArr[index] = action.payload
+
+            return {
+                ...state,
+                cans: newArr,
+            }
+        }
 
             default:
                 return state;

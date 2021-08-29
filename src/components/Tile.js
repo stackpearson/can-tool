@@ -6,8 +6,8 @@ import {updateCan, deleteCan} from '../actions/canActions';
 
 const Tile = (props) => {
     const [updatedTile, setUpdatedTile] = useState({
-        can_name: '',
-        can_text: ''
+        can_name: props.tileData.can_name,
+        can_text: props.tileData.can_text
     })
 
     const handleCopy = () => {
@@ -27,7 +27,7 @@ const Tile = (props) => {
 
     const updateCan = (e) => {
         e.preventDefault();
-
+        console.log('udpatedTile', updatedTile)
         axiosWithAuth()
         .put(`https://cans-be.herokuapp.com/api/cans/update-can/${props.tileData.id}`, updatedTile)
         .then((res) => {

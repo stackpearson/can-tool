@@ -16,6 +16,26 @@ export const canReducer = (state = initialOptions, action) => {
                 cans: state.cans.concat(action.payload)
             };
 
+        case 'DELETE_CAN':
+            return {
+                ...state,
+                cans: state.cans.filter(item => {
+                    return (item.id !== action.payload.id)
+                })
+            }
+
+        // case 'UPDATE_CAN':
+        //     return state.cans.map((item) => {
+        //         if (item.id !== action.payload.id){
+        //             return item
+        //         }
+
+        //         return {
+        //             ...item,
+        //             ...action.payload
+        //         }
+        //     })
+
             default:
                 return state;
     }

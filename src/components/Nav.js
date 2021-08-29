@@ -26,7 +26,7 @@ function Nav(props) {
 
       ) : (
       
-        <p>No token = no nav</p>
+        <h1>Welcome to Express Cans!</h1>
           
       )}
 

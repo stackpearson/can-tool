@@ -44,7 +44,7 @@ const Register = (props) => {
         <div className='landing'>
         <h1>Let's create your account!</h1>
             <div>
-                <Form onSubmit={registerUser}>
+                <Form className='authForm' onSubmit={registerUser}>
                 <FormGroup>
                     <Label for="username"></Label>
                     <Input type="username" name="username" placeholder="Username" onChange={handleChanges} value={loginCreds.username} />
@@ -56,7 +56,7 @@ const Register = (props) => {
 
             
                 <Button type="submit">Register</Button>
-                <p>Already a member <Link to='/'>Sign in</Link></p>
+                <p>Already a member? <Link to='/'>Sign in</Link></p>
                 </Form>
             </div>
         </div>

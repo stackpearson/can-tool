@@ -2,6 +2,8 @@ import Tile from './Tile';
 import {useEffect, useState} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {Form, FormGroup, Button, Label, Input} from 'reactstrap';
+import {connect} from 'react-redux';
+import {setCans, addCan} from '../actions/canActions';
 
 const TileContainer = (props) => {
 
@@ -13,23 +15,29 @@ const TileContainer = (props) => {
         axiosWithAuth()
         .get(`https://cans-be.herokuapp.com/api/cans/user-cans/${localStorage.getItem('user-id')}`)
         .then(res => {
-            console.log(res)
-            setTileInfo(res.data)
+            // console.log(res)
+            props.setCans(res.data)
+            // console.log(props.cansOnProps.cans)
         })
     }
 
     const addCan = (e) => {
         e.preventDefault();
-
+        e.persist();
         axiosWithAuth()
         .post(`https://cans-be.herokuapp.com/api/cans/new-can/${localStorage.getItem('user-id')}`, newTile)
         .then((res) => {
             console.log('res from addCan post', res.data)
-            tileInfo.push(res.data)
-
+            props.addCan(res.data)
+            
         })
     }
 
+    const [newTile, setNewTile] = useState({
+        can_name: '',
+        can_text: ''
+    })
+    
     const handleChanges = (e) => {
         e.persist();
         const currentTile = {
@@ -40,12 +48,6 @@ const TileContainer = (props) => {
     }
 
 
-    const [tileInfo, setTileInfo] = useState([])
-
-    const [newTile, setNewTile] = useState({
-        can_name: '',
-        can_text: ''
-    })
 
 
 
@@ -67,14 +69,23 @@ const TileContainer = (props) => {
                 <Button type="submit">Add</Button>
                 </Form>
         <div className='tile-container'>
-        {tileInfo.map((tile) => (
+        {props.cansOnProps.cans.map((tile) => (
             <Tile key={tile.id} tileData={tile} />
         ))}
         </div>
     </>)
 }
 
-export default TileContainer;
+const mapStateToProps = state => {
+    return {
+        cansOnProps: state.canReducer
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    {setCans, addCan}
+  )(TileContainer)
 
 // Add CRUD functionalty for tiles
 // Add themes

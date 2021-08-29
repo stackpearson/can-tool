@@ -1,12 +1,13 @@
 import {useState} from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import {Form, FormGroup, Button, Label, Input} from 'reactstrap';
+import {connect} from 'react-redux';
+import {updateCan, deleteCan} from '../actions/canActions';
 
 const Tile = (props) => {
-    const [tileInfo, setTileInfo] = useState(props)
     const [updatedTile, setUpdatedTile] = useState({
-        can_name: '',
-        can_text: ''
+        can_name: props.tileData.can_name,
+        can_text: props.tileData.can_text
     })
 
     const handleCopy = () => {
@@ -18,17 +19,20 @@ const Tile = (props) => {
         axiosWithAuth()
         .delete(`https://cans-be.herokuapp.com/api/cans/delete-can/${props.tileData.id}`)
         .then((res) => {
+            props.deleteCan(props.tileData)
             console.log('res from deleteCan', res)
+
         })
     }
 
     const updateCan = (e) => {
         e.preventDefault();
-
+        console.log('udpatedTile', updatedTile)
         axiosWithAuth()
         .put(`https://cans-be.herokuapp.com/api/cans/update-can/${props.tileData.id}`, updatedTile)
         .then((res) => {
             console.log('res from editCan put', res)
+            props.updateCan(res.data)
         })
     }
 
@@ -68,7 +72,16 @@ const Tile = (props) => {
     </>)
 }
 
-export default Tile;
+const mapStateToProps = state => {
+    return {
+        cansOnProps: state.canReducer
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    {updateCan, deleteCan}
+  )(Tile)
 
 // Add put functionality to edit existing tiles
 // Replace the C & * with actual UI elements for copy edit & delete

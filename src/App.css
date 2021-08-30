@@ -8,13 +8,39 @@ a:hover {
   font-weight: bold;
 }
 
+.add-can-controls {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.add-can-controls > button {
+  margin: 10px;
+}
+
+#add-can-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 600px;
+  text-align: center;
+  justify-content: center;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.add-can-form_header {
+  width: 450px;
+}
+
 .app {
   background-color: #282c34;
   min-height: 100vh;
   color: white;
 }
 
-.authForm > div > input {
+.auth-form > div > input {
   width: 400px;
   height: 40px;
   margin: 10px;
@@ -23,8 +49,16 @@ a:hover {
   border-radius: 10px;
 }
 
+.close {
+  text-align: right;
+}
+
 .dashboard {
-  border: 1px solid black;
+  background-color: #18252e;
+}
+
+.hidden {
+  display: none !important;
 }
 
 html {
@@ -41,7 +75,31 @@ html {
   text-align: center;
 }
 
-.signIn {
+.nav-bar {
+  margin: 10px 0px;
+}
+
+.nav-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-controls > button {
+  margin: 5px;
+}
+
+.nav-header {
+  text-align: center;
+  font-weight: 400;
+  text-shadow: -2px 2px silver;
+}
+
+#root {
+  background-color: #18252e;
+  color: white;
+}
+
+.sign-in {
   margin: 10px;
 }
 
@@ -58,13 +116,24 @@ html {
   flex-wrap: wrap;
   justify-content: center;
   align-items: middle;
+  margin-top: 15px;
 }
 
 .tile-text {
   display: none;
 }
 
-.nav-bar {
-  border: 1px solid black;
+#welcome-message {
+  animation: fadeOut 5s;
 }
 
+@keyframes fadeOut {
+  0% {
+    color: rgb(255, 255, 255)
+  }
+
+
+  100% {
+    color: rgba(255, 255, 255, 0.1)
+  }
+}

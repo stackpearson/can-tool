@@ -43,8 +43,8 @@ const Login = (props) => {
     return (<> 
         <div className='landing'>
             <h2>Sign In</h2>
-            <div className='signIn'>
-                <Form className='authForm' onSubmit={signIn}>
+            <div className='sign-in'>
+                <Form className='auth-form' onSubmit={signIn}>
                 <FormGroup>
                     <Label for="username"></Label>
                     <Input type="username" name="username" placeholder="Username" onChange={handleChanges} value={loginCreds.username} />

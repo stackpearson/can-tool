@@ -29,6 +29,7 @@ const TileContainer = (props) => {
         .then((res) => {
             console.log('res from addCan post', res.data)
             props.addCan(res.data)
+            hideAddCanForm()
             
         })
     }
@@ -47,27 +48,38 @@ const TileContainer = (props) => {
         setNewTile(currentTile) 
     }
 
-
+    const hideAddCanForm = () => {
+        if (document.getElementById('add-can-form')) {
+          let form = document.getElementById('add-can-form');
+          form.classList.add('hidden')
+        }
+      }
 
 
 
     return(<>
-    <div>
-        <span>Add Can</span>
-    </div>
-    <Form onSubmit={addCan}>
-                <FormGroup>
-                    <Label for="can_name"></Label>
-                    <Input type="text" name="can_name" placeholder="Can Name" onChange={handleChanges} value={newTile.can_name} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="can_text"></Label>
-                    <Input type="text" name="can_text" placeholder="Can Text" onChange={handleChanges} value={newTile.can_text} />
-                </FormGroup>
+    <div id='add-can-form' className='hidden'>
+        <h3>Add A Can</h3> 
+    
+    <Form className='add-can-form' onSubmit={addCan} onReset={() => hideAddCanForm()}>
+    
+        <FormGroup>
+            <Label for="can_name"></Label>
+            <Input type="text" name="can_name" placeholder="Can Name" onChange={handleChanges} value={newTile.can_name} />
+        </FormGroup>
 
-            
-                <Button type="submit">Add</Button>
-                </Form>
+        <FormGroup>
+            <Label for="can_text"></Label>
+            <Input type="textarea" name="can_text" placeholder="Can Text" onChange={handleChanges} value={newTile.can_text} />
+        </FormGroup>
+
+        <div className='add-can-controls'>
+            <Button color="success" size="lg" type="submit">Add</Button>
+            <Button color='danger' type='reset'>Cancel</Button>
+        </div>
+        
+    </Form>
+    </div>
         <div className='tile-container'>
         {props.cansOnProps.cans.map((tile) => (
             <Tile key={tile.id} tileData={tile} />

@@ -12,7 +12,6 @@ const Tile = (props) => {
     })
 
     const handleCopy = () => {
-        // setTileInfo(null)
         navigator.clipboard.writeText(props.tileData.can_text)
     }
 
@@ -21,7 +20,6 @@ const Tile = (props) => {
         .delete(`https://cans-be.herokuapp.com/api/cans/delete-can/${props.tileData.id}`)
         .then((res) => {
             props.deleteCan(props.tileData)
-            console.log('res from deleteCan', res)
 
         })
     }
@@ -32,7 +30,6 @@ const Tile = (props) => {
         axiosWithAuth()
         .put(`https://cans-be.herokuapp.com/api/cans/update-can/${props.tileData.id}`, updatedTile)
         .then((res) => {
-            console.log('res from editCan put', res)
             props.updateCan(res.data)
             hideEdit();
         })
@@ -46,28 +43,6 @@ const Tile = (props) => {
         }
         setUpdatedTile(currentTile) 
     }
-
-    // const showCanText = () => {
-    //     if (document.getElementById('can-text') && document.getElementById('view-icon') && document.getElementById('hide-icon-container')) {
-    //       let form = document.getElementById('can-text');
-    //       let showIcon = document.getElementById('view-icon')
-    //       let hideIcon = document.getElementById('hide-icon-container')
-    //       form.classList.remove('hidden')
-    //       showIcon.classList.add('hidden')
-    //       hideIcon.classList.remove('hidden')
-    //     }
-    //   }
-
-    //   const hideCanText = () => {
-    //     if (document.getElementById('can-text') && document.getElementById('show-icon-container') && document.getElementById('hide-icon-container')) {
-    //       let form = document.getElementById('can-text');
-    //       let showIcon = document.getElementById('show-icon-container')
-    //       let hideIcon = document.getElementById('hide-icon-container')
-    //       form.classList.add('hidden')
-    //       showIcon.classList.remove('hidden')
-    //       hideIcon.classList.add('hidden')
-    //     }
-    //   }
 
     const showCanText = () => {
         if (document.getElementById(`can-text-${props.tileData.id}`) && document.getElementById(`view-icon-${props.tileData.id}`) && document.getElementById(`hide-icon-${props.tileData.id}`)) {
@@ -176,7 +151,3 @@ const mapStateToProps = state => {
     mapStateToProps,
     {updateCan, deleteCan}
   )(Tile)
-
-// Add put functionality to edit existing tiles
-// Replace the C & * with actual UI elements for copy edit & delete
-// Add a hover function that expands the tile to show the can text

@@ -15,9 +15,7 @@ const TileContainer = (props) => {
         axiosWithAuth()
         .get(`https://cans-be.herokuapp.com/api/cans/user-cans/${localStorage.getItem('user-id')}`)
         .then(res => {
-            // console.log(res)
             props.setCans(res.data)
-            // console.log(props.cansOnProps.cans)
         })
     }
 
@@ -27,7 +25,6 @@ const TileContainer = (props) => {
         axiosWithAuth()
         .post(`https://cans-be.herokuapp.com/api/cans/new-can/${localStorage.getItem('user-id')}`, newTile)
         .then((res) => {
-            console.log('res from addCan post', res.data)
             props.addCan(res.data)
             hideAddCanForm()
             

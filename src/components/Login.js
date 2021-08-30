@@ -42,9 +42,9 @@ const Login = (props) => {
 
     return (<> 
         <div className='landing'>
-            <h1>Welcome To Express Cans!</h1>
-            <div>
-                <Form onSubmit={signIn}>
+            <h2>Sign In</h2>
+            <div className='sign-in'>
+                <Form className='auth-form' onSubmit={signIn}>
                 <FormGroup>
                     <Label for="username"></Label>
                     <Input type="username" name="username" placeholder="Username" onChange={handleChanges} value={loginCreds.username} />
@@ -56,7 +56,7 @@ const Login = (props) => {
 
             
                 <Button type="submit">Login</Button>
-                <p>New? <Link to='/register'>Register</Link></p>
+                <p className='link'>New? <Link to='/register'>Register</Link></p>
                 </Form>
             </div>
         </div>

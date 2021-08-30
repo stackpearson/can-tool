@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import {Form, FormGroup, Button, Label, Input, UncontrolledTooltip} from 'reactstrap';
+import {Form, FormGroup, Button, Label, Input, UncontrolledTooltip, UncontrolledCollapse} from 'reactstrap';
 import {connect} from 'react-redux';
 import {updateCan, deleteCan} from '../actions/canActions';
 import {BsFillGearFill, BsClipboard, BsTrash, BsFillEyeFill, BsFillEyeSlashFill} from 'react-icons/bs';
@@ -69,10 +69,10 @@ const Tile = (props) => {
     //   }
 
     const showCanText = () => {
-        if (document.getElementById('can-text') && document.getElementById('view-icon') && document.getElementById('hide-icon')) {
-          let form = document.getElementById('can-text');
-          let showIcon = document.getElementById('view-icon')
-          let hideIcon = document.getElementById('hide-icon')
+        if (document.getElementById(`can-text-${props.tileData.id}`) && document.getElementById(`view-icon-${props.tileData.id}`) && document.getElementById(`hide-icon-${props.tileData.id}`)) {
+          let form = document.getElementById(`can-text-${props.tileData.id}`);
+          let showIcon = document.getElementById(`view-icon-${props.tileData.id}`)
+          let hideIcon = document.getElementById(`hide-icon-${props.tileData.id}`)
           form.classList.remove('hidden')
           showIcon.classList.add('hidden')
           hideIcon.classList.remove('hidden')
@@ -80,15 +80,16 @@ const Tile = (props) => {
       }
 
       const hideCanText = () => {
-        if (document.getElementById('can-text') && document.getElementById('view-icon') && document.getElementById('hide-icon')) {
-          let form = document.getElementById('can-text');
-          let showIcon = document.getElementById('view-icon')
-          let hideIcon = document.getElementById('hide-icon')
+        if (document.getElementById(`can-text-${props.tileData.id}`) && document.getElementById(`view-icon-${props.tileData.id}`) && document.getElementById(`hide-icon-${props.tileData.id}`)) {
+          let form = document.getElementById(`can-text-${props.tileData.id}`);
+          let showIcon = document.getElementById(`view-icon-${props.tileData.id}`)
+          let hideIcon = document.getElementById(`hide-icon-${props.tileData.id}`)
           form.classList.add('hidden')
           showIcon.classList.remove('hidden')
           hideIcon.classList.add('hidden')
         }
       }
+
 
     return (<> 
         <div className='tile'>
@@ -100,45 +101,51 @@ const Tile = (props) => {
                     </UncontrolledTooltip>
                     <BsClipboard id='clipboard-icon' onClick={() => handleCopy()}/>
 
-                    <UncontrolledTooltip placement='top' target='edit-icon'>
+                    <UncontrolledTooltip placement='top' target='toggler'>
                         Edit this can
                     </UncontrolledTooltip>
-                    <BsFillGearFill id='edit-icon' onClick={() => updateCan()}/>
+                    <BsFillGearFill id='toggler'/>
 
                     <UncontrolledTooltip placement='top' target='delete-icon'>
                         Delete this can
                     </UncontrolledTooltip>
                     <BsTrash id='delete-icon' onClick={() => deleteCan()}/>
 
-                    <UncontrolledTooltip placement='top' target='view-icon'>
+                    <UncontrolledTooltip placement='top' target={`view-icon-${props.tileData.id}`}>
                         View can text
                     </UncontrolledTooltip>
-                    <BsFillEyeFill id='view-icon' onClick={() => showCanText()}/>
+                    <BsFillEyeFill id={`view-icon-${props.tileData.id}`} onClick={() => showCanText()}/>
 
-                    <UncontrolledTooltip placement='top' target='hide-icon'>
+                    <UncontrolledTooltip placement='top' target={`hide-icon-${props.tileData.id}`}>
                         Hide can text
                     </UncontrolledTooltip>
-                    <BsFillEyeSlashFill id='hide-icon' className='hidden' onClick={() => hideCanText()}/>
+                    <BsFillEyeSlashFill id={`hide-icon-${props.tileData.id}`} className='hidden' onClick={() => hideCanText()}/>
                 </div>
   
             </div>
             <p className='can-name'>{props.tileData.can_name}</p>
-            <div id='can-text' className='hidden'>{props.tileData.can_text}</div>
+            <div id={`can-text-${props.tileData.id}`} className='hidden'>{props.tileData.can_text}</div>
+
+            <UncontrolledCollapse toggler='#toggler'>
+                <div id={`edit-form-${props.tileData.id}`}>
+                    <Form onSubmit={updateCan}>
+                    <FormGroup>
+                        <Label for="can_name"></Label>
+                        <Input type="text" name="can_name" placeholder="Can Name" onChange={handleChanges} value={updatedTile.can_name} />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label for="can_text"></Label>
+                        <Input type="text" name="can_text" placeholder="Can Text" onChange={handleChanges} value={updatedTile.can_text} />
+                    </FormGroup>
+
+                    <Button type="submit">Update</Button>
+                    </Form>
+                </div>
+            </UncontrolledCollapse>
         </div>
 
-        <Form onSubmit={updateCan}>
-                <FormGroup>
-                    <Label for="can_name"></Label>
-                    <Input type="text" name="can_name" placeholder="Can Name" onChange={handleChanges} value={updatedTile.can_name} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="can_text"></Label>
-                    <Input type="text" name="can_text" placeholder="Can Text" onChange={handleChanges} value={updatedTile.can_text} />
-                </FormGroup>
 
-            
-                <Button type="submit">Update</Button>
-        </Form>
     </>)
 }
 

@@ -68,6 +68,15 @@ a:hover {
   background-color: #18252e;
 }
 
+.edit-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-buttons > button {
+  margin: 5px;
+}
+
 .hidden {
   display: none !important;
 }

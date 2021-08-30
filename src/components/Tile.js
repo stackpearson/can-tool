@@ -34,6 +34,7 @@ const Tile = (props) => {
         .then((res) => {
             console.log('res from editCan put', res)
             props.updateCan(res.data)
+            hideEdit();
         })
     }
 
@@ -90,6 +91,20 @@ const Tile = (props) => {
         }
       }
 
+      const allowEdit = () => {
+        if (document.getElementById(`edit-form-${props.tileData.id}`)) {
+          let form = document.getElementById(`edit-form-${props.tileData.id}`);
+          form.classList.remove('hidden')
+        }
+      }
+
+      const hideEdit = () => {
+        if (document.getElementById(`edit-form-${props.tileData.id}`)) {
+            let form = document.getElementById(`edit-form-${props.tileData.id}`);
+            form.classList.add('hidden')
+          }
+      }
+
 
     return (<> 
         <div className='tile'>
@@ -101,10 +116,10 @@ const Tile = (props) => {
                     </UncontrolledTooltip>
                     <BsClipboard id='clipboard-icon' onClick={() => handleCopy()}/>
 
-                    <UncontrolledTooltip placement='top' target='toggler'>
+                    <UncontrolledTooltip placement='top' target={`edit-form-button-${props.tileData.id}`}>
                         Edit this can
                     </UncontrolledTooltip>
-                    <BsFillGearFill id='toggler'/>
+                    <BsFillGearFill id={`edit-form-button-${props.tileData.id}`} onClick={() => allowEdit()}/>
 
                     <UncontrolledTooltip placement='top' target='delete-icon'>
                         Delete this can
@@ -126,8 +141,8 @@ const Tile = (props) => {
             <p className='can-name'>{props.tileData.can_name}</p>
             <div id={`can-text-${props.tileData.id}`} className='hidden'>{props.tileData.can_text}</div>
 
-            <UncontrolledCollapse toggler='#toggler'>
-                <div id={`edit-form-${props.tileData.id}`}>
+
+            <div id={`edit-form-${props.tileData.id}`} className='hidden'>
                     <Form onSubmit={updateCan}>
                     <FormGroup>
                         <Label for="can_name"></Label>
@@ -139,10 +154,12 @@ const Tile = (props) => {
                         <Input type="text" name="can_text" placeholder="Can Text" onChange={handleChanges} value={updatedTile.can_text} />
                     </FormGroup>
 
-                    <Button type="submit">Update</Button>
+                    <div className='edit-buttons'>
+                        <Button type="submit" color='success'>Update</Button>
+                        <Button onClick={() => hideEdit()} type='reset' color='danger'>Cancel</Button>
+                    </div>
                     </Form>
                 </div>
-            </UncontrolledCollapse>
         </div>
 
 

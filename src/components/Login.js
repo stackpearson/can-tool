@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import axios from 'axios';
-import { Form, FormGroup, Button, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Button, Label, Input, Spinner } from 'reactstrap';
 import {Link, useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {setUser} from '../actions/userActions';
@@ -14,6 +14,8 @@ const Login = (props) => {
         password: ''
     });
 
+    const [loggingIn, setLogin] = useState(false);
+
     const handleChanges = (e) => {
         e.persist();
         const currentCreds = {
@@ -24,6 +26,7 @@ const Login = (props) => {
     }
 
     const signIn = (e) => {
+        setLogin(true)
         e.preventDefault();
         e.persist();
 
@@ -36,11 +39,24 @@ const Login = (props) => {
             localStorage.setItem('user-id', res.data.id)
             localStorage.setItem('isLoggedIn', true)
             props.setUser(res.data)
+            setLogin(false)
             history.push('/dashboard')
         })
     }
 
-    return (<> 
+    return (<>
+
+        {loggingIn ? (
+
+            <div className='spinner-container'>
+                <div className="spinner-border" role='status' >
+                    <span className='visually-hidden'>Loading...</span>
+                </div>
+            </div>
+
+        ) : (
+
+        
         <div className='landing'>
             <h2>Sign In</h2>
             <div className='sign-in'>
@@ -60,6 +76,7 @@ const Login = (props) => {
                 </Form>
             </div>
         </div>
+        )}
     </>)
 }
 

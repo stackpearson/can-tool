@@ -14,6 +14,8 @@ const Register = (props) => {
         password: ''
     });
 
+    const [isRegistering, setRegister] = useState(false);
+
     const handleChanges = (e) => {
         e.persist();
         const currentCreds = {
@@ -24,6 +26,7 @@ const Register = (props) => {
     }
 
     const registerUser = (e) => {
+        setRegister(true);
         e.preventDefault();
         e.persist();
 
@@ -36,30 +39,44 @@ const Register = (props) => {
             localStorage.setItem('user-id', res.data.id)
             localStorage.setItem('isLoggedIn', true)
             props.setUser(res.data)
+            setRegister(false)
             history.push('/dashboard')
         })
     }
 
     return (<> 
-        <div className='landing'>
-        <h1>Let's create your account!</h1>
-            <div>
-                <Form className='auth-form' onSubmit={registerUser}>
-                <FormGroup>
-                    <Label for="username"></Label>
-                    <Input type="username" name="username" placeholder="Username" onChange={handleChanges} value={loginCreds.username} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="password"></Label>
-                    <Input type="password" name="password" placeholder="Password" onChange={handleChanges} value={loginCreds.password} />
-                </FormGroup>
 
-            
-                <Button type="submit">Register</Button>
-                <p>Already a member? <Link to='/'>Sign in</Link></p>
-                </Form>
+        {isRegistering ? (
+
+            <div className='spinner-container'>
+                <div className="spinner-border" role='status' >
+                    <span className='visually-hidden'>Loading...</span>
+                </div>
             </div>
-        </div>
+
+        ) : (
+
+            <div className='landing'>
+            <h1>Let's create your account!</h1>
+                <div>
+                    <Form className='auth-form' onSubmit={registerUser}>
+                    <FormGroup>
+                        <Label for="username"></Label>
+                        <Input type="username" name="username" placeholder="Username" onChange={handleChanges} value={loginCreds.username} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password"></Label>
+                        <Input type="password" name="password" placeholder="Password" onChange={handleChanges} value={loginCreds.password} />
+                    </FormGroup>
+    
+                
+                    <Button type="submit">Register</Button>
+                    <p>Already a member? <Link to='/'>Sign in</Link></p>
+                    </Form>
+                </div>
+            </div>
+        )}
+
     </>)
 }
 

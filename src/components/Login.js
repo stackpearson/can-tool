@@ -42,6 +42,10 @@ const Login = (props) => {
             setLogin(false)
             history.push('/dashboard')
         })
+        .catch(err => {
+            alert('invalid login credentials, please try again')
+            setLogin(false)
+        })
     }
 
     return (<>

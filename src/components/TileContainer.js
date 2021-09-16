@@ -95,7 +95,3 @@ const mapStateToProps = state => {
     mapStateToProps,
     {setCans, addCan}
   )(TileContainer)
-
-// Add CRUD functionalty for tiles
-// Add themes
-// Add a titles region so you can organize cans into categories

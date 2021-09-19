@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {logOut, setUser} from '../actions/userActions';
 import { useEffect } from 'react';
 import {Button} from 'reactstrap'
+import {cat} from '../media/cat-typing.gif'
 
 
 function Nav(props) {
@@ -42,8 +43,11 @@ function Nav(props) {
     {props.userOnProps.isLoggedIn ? (
 
         <div className='nav-bar'>
-          <h1 id='welcome-message'>Welcome back {props.userOnProps.user.username}</h1>
-
+          <div className='greeting' id='welcome-message'>
+            <div><h1>Welcome {props.userOnProps.user.username}</h1></div>
+            <img className='cat-gif' alt='cat typing' src={require('../media/cat-typing.gif').default} />
+          </div>
+          
           <div className='nav-controls'>
             <Button outline color='success' onClick={() => showAddCanForm()} >Add Can</Button>
             <div><h2>Express Cans</h2></div>
@@ -71,3 +75,4 @@ export default connect(
   mapStateToProps,
   {logOut, setUser}
 )(Nav)
+

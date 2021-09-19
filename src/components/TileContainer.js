@@ -27,7 +27,6 @@ const TileContainer = (props) => {
         .then((res) => {
             props.addCan(res.data)
             hideAddCanForm()
-            
         })
     }
 
@@ -55,6 +54,9 @@ const TileContainer = (props) => {
 
 
     return(<>
+
+    
+
     <div id='add-can-form' className='hidden'>
         <h3>Add A Can</h3> 
     
@@ -77,11 +79,29 @@ const TileContainer = (props) => {
         
     </Form>
     </div>
+
+    {props.cansOnProps.cans.length ? (
+   
         <div className='tile-container'>
-        {props.cansOnProps.cans.map((tile) => (
-            <Tile key={tile.id} tileData={tile} />
-        ))}
+            {props.cansOnProps.cans.map((tile) => (
+                <Tile key={tile.id} tileData={tile} />
+            ))}
         </div>
+
+        ) : (
+
+        <div className='new-user-info'>
+            <div>
+            <p>It looks like you don't have any cans yet!</p>
+            <p>Get started by clicking the green "Add Can" button in the top left</p>
+            </div>
+        </div>
+    )}
+ 
+
+
+
+ 
     </>)
 }
 

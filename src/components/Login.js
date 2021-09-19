@@ -56,6 +56,7 @@ const Login = (props) => {
                 <div className="spinner-border" role='status' >
                     <span className='visually-hidden'>Loading...</span>
                 </div>
+                <div>Initial login can take up to a minute, please bear with us :)</div>
             </div>
 
         ) : (

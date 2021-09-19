@@ -60,6 +60,13 @@ a:hover {
   padding: 5px;
 }
 
+.cat-gif {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
 .close {
   text-align: right;
 }
@@ -75,6 +82,13 @@ a:hover {
 
 .edit-buttons > button {
   margin: 5px;
+}
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 100px;
 }
 
 .hidden {
@@ -114,6 +128,7 @@ html {
   text-shadow: -2px 2px silver;
 }
 
+
 #root {
   background-color: #18252e;
   color: white;
@@ -123,7 +138,7 @@ html {
   margin: 10px;
 }
 
-.spinner-container {
+.spinner-container, .new-user-info {
   position: absolute;
   left: 50%;
   top: 50%;

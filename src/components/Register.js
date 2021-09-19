@@ -52,7 +52,7 @@ const Register = (props) => {
                 <div className="spinner-border" role='status' >
                     <span className='visually-hidden'>Loading...</span>
                 </div>
-                <span>Initial registration can take up to a minute, please bear with us :)</span>
+                <div>Initial registration can take up to a minute, please bear with us :)</div>
             </div>
 
         ) : (
